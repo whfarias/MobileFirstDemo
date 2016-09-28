@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Licensed Material - Property of IBM
+
+   © Copyright 2015 IBM Corp.
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="ibm-mfp-push-tests"
+    version="1.0.2-dev">
+    <name>IBM MobileFirst Platform Foundation Cordova Push Notifications Plugin Tests</name>
+    <license>Apache 2.0</license>
+
+    <js-module src="tests.js" name="tests">
+    </js-module>
+
+</plugin>

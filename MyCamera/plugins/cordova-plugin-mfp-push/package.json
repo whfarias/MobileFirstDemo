@@ -1,0 +1,45 @@
+{
+    "name": "cordova-plugin-mfp-push",
+    "version": "8.0.2016070407",
+    "description": "Cordova Plugin for the IBM MobileFirst Platform Foundation Push",
+    "cordova": {
+        "id": "cordova-plugin-mfp-push",
+        "platforms": [
+            "android",
+            "ios",
+            "windows"
+        ]
+    },
+    "homepage": "https://hub.jazz.net/project/ibmmfpf/cordova-plugin-mfp-push",
+    "repository": {
+        "type": "git",
+        "url": "https://hub.jazz.net/git/ibmmfpf/cordova-plugin-mfp-push"
+    },
+    "keywords": [
+        "cordova",
+        "ibm",
+        "worklight",
+        "mobilefirst",
+        "mfp",
+        "ecosystem:cordova",
+        "cordova-android",
+        "cordova-ios",
+        "cordova-windows"
+    ],
+    "engines": [
+        {
+            "name": "cordova-android",
+            "version": ">=5.0.0 <6"
+        },
+        {
+            "name": "cordova-ios",
+            "version": ">=4.0.1 <5"
+        },
+        {
+            "name": "cordova-plugman",
+            "version": ">=6.0.0 <7"
+        }
+    ],
+    "author": "IBM",
+    "license": "SEE LICENSE IN LICENSE.TXT"
+}

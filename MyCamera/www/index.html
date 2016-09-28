@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script src="js/ng-cordova.js"></script>
+
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/camera-util.js"></script>
+    <!-- <script src="js/services.js"></script> -->
+  </head>
+  <body ng-app="starter">
+
+    <ion-pane>
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">Demo Votorantim Cimentos</h1>
+      </ion-header-bar>
+
+
+      <ion-tabs class="tabs-striped tabs-footer tabs-background-dark tabs-color-light">
+        <ion-tab title="Produtos" icon-on='ion-home' icon-off='ion-home' ng-controller='ProdController' on-select='onTabSelect()'>
+          <ion-view>
+            <ion-footer-bar class="bar-dark">
+            </ion-footer-bar>
+            <ion-content>
+              <ion-list >
+                <ion-item  align="center" >
+                  Produtos
+                </ion-item>
+                <ion-item class="item item-divider" ng-repeat="Prod in Prods track by $index" >
+                  <div class="card" >
+                     <div class="item item-avatar">
+                          <b>{{Prod.name}}</b>
+                          <br>Tipo:{{Prod.type}}
+                          <br>Quantidade: {{Prod.amount}}
+                      </div>
+                      <div class="item item-image">
+                        <img ng-src="{{Prod.link}}" alt="" />
+                      </div>
+                    </div>
+                </ion-item>
+              </ion-list>
+            </ion-content>
+          </ion-view>
+        </ion-tab>
+
+        <ion-tab title="Camera" icon-on='ion-ios-camera' icon-off='ion-ios-camera' ng-controller='CameraController' on-select='onTabSelect()'>
+          <ion-view>
+            <!-- <filter-bar></filter-bar> -->
+            <ion-content>
+              <div class="card" ng-if="imageCamera !== undefined">
+                <div class="item item-image">
+                    <img ng-src={{imageCamera}} alt="" />
+                </div>
+              </div>
+            </ion-content>
+          </ion-view>
+        </ion-tab>
+
+        <ion-tab title="Galeria" icon-on='ion-images' icon-off='ion-images' ng-controller='GaleriaController' on-select='onTabSelect()'>
+          <ion-view>
+            <ion-content>
+                <ion-list >
+                  <ion-item  align="center" >
+                    Documentos
+                    <!-- <button type="button" name="button" ng-click="onShowImagem()">Click me</button> -->
+                  </ion-item>
+                    <!-- ng-repeat="Doc in Docs track by $index"  -->
+                  <ion-item class="item item-divider" ng-repeat="Doc in Docs track by $index" >
+                    <div class="card" >
+                       <div class="item item-avatar">
+                            <b>{{Doc.doc.Documento}}</b>
+                        </div>
+                        <div class="item item-image">
+                          <img src="{{trustSrc(Doc.url)}}" alt="" />
+                        </div>
+                      </div>
+                  </ion-item>
+                </ion-list>
+            </ion-content>
+
+          </ion-view>
+        </ion-tab>
+      </ion-tabs>
+
+    </ion-pane>
+  </body>
+</html>

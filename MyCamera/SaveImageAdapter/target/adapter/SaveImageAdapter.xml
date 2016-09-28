@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Licensed Materials - Property of IBM
+	5725-I43 (C) Copyright IBM Corp. 2011, 2016. All Rights Reserved.
+	US Government Users Restricted Rights - Use, duplication or
+	disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<mfp:adapter name="SaveImageAdapter"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:mfp="http://www.ibm.com/mfp/integration"
+			 xmlns:http="http://www.ibm.com/mfp/integration/http">
+
+	<displayName>SaveImageAdapter</displayName>
+	<description>SaveImageAdapter</description>
+	<connectivity>
+		<connectionPolicy xsi:type="http:HTTPConnectionPolicyType">
+			<protocol>https</protocol>
+			<domain>25704a7a-f19f-4f97-b4f9-b7c6b4f20d28-bluemix.cloudant.com</domain>
+			<port>443</port>
+			<connectionTimeoutInMilliseconds>30000</connectionTimeoutInMilliseconds>
+			<socketTimeoutInMilliseconds>30000</socketTimeoutInMilliseconds>
+			<authentication>
+				<basic/>
+					<serverIdentity>
+						<username>dfastannimeneciedeptednt</username>
+						<password>ed51d6a2761755a6f1873a39ac57d47735c37105</password>
+					</serverIdentity>
+			</authentication>
+			<maxConcurrentConnectionsPerNode>50</maxConcurrentConnectionsPerNode>
+			<!-- Following properties used by adapter's key manager for choosing specific certificate from key store
+			<sslCertificateAlias></sslCertificateAlias>
+			<sslCertificatePassword></sslCertificatePassword>
+			-->
+		</connectionPolicy>
+	</connectivity>
+
+	<procedure name="addEntry" secured="false"/>
+	<procedure name="getDocs" secured="false"/>
+
+
+</mfp:adapter>

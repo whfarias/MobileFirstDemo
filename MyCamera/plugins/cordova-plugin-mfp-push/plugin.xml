@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+    Licensed Material - Property of IBM
+
+   © Copyright 2016 IBM Corp.
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+    <plugin id="cordova-plugin-mfp-push" version="8.0.2016070407" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    	<name>IBM MobileFirst Platform Foundation - Push Notifications</name>
+    	<description>IBM MobileFirst Platform Foundation Cordova Push Notifications Plugin</description>
+
+        <dependency id="cordova-plugin-mfp" version="&gt;=8.0.0" />
+
+        <platform name="android">
+            <js-module name="MFPPush" src="www/MFPPush.js">
+                <clobbers target="MFPPush" />
+            </js-module>
+            <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
+            <framework src="com.google.android.gms:play-services-gcm:+" />
+
+            <config-file target="AndroidManifest.xml" parent="/manifest">
+                <permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+                <uses-permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" />
+                <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+                <uses-permission android:name="android.permission.INTERNET"/>
+                <uses-permission android:name="android.permission.WAKE_LOCK" />
+                <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+                <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+                <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+            </config-file>
+            
+            <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+                <!--Notification Intent -->
+                <intent-filter>
+                    <action android:name="$PACKAGE_NAME.IBMPushNotification" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+            </config-file>
+
+
+            <config-file target="AndroidManifest.xml" parent="/manifest/application">
+                <!-- Add GCM Intent Service and intent-filters for RECEIVE and REGISTRATION of notifications -->
+		        <receiver
+		            android:name="com.google.android.gms.gcm.GcmReceiver"
+		            android:exported="true"
+		            android:permission="com.google.android.c2dm.permission.SEND" >
+		            <intent-filter>
+		                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+		                <category android:name="$PACKAGE_NAME" />
+		            </intent-filter>
+		            <intent-filter>
+		                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+		                <category android:name="$PACKAGE_NAME" />
+		            </intent-filter>
+		        </receiver>
+		
+		        <service
+		            android:name="com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushIntentService"
+		            android:exported="false" >
+		            <intent-filter>
+		                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+		            </intent-filter>
+		        </service>
+		        <service
+		            android:name="com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushInstanceIDListenerService"
+		            android:exported="false">
+		            <intent-filter>
+		                <action android:name="com.google.android.gms.iid.InstanceID" />
+		            </intent-filter>
+		        </service>
+            </config-file>
+
+            <config-file parent="/*" target="res/xml/config.xml">
+                <feature name="MFPPushPlugin">
+                    <param name="android-package" value="com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.push.CDVMFPPush" />
+                </feature>
+            </config-file>
+
+            <config-file parent="/*" target="AndroidManifest.xml" />
+            
+            <lib-file src="src/android/libs/ibmmobilefirstplatformfoundationpush.jar" />
+            
+	        <resource-file src="src/android/res/drawable-hdpi/push_notification_icon.png" target="res/drawable-hdpi/push_notification_icon.png" />
+	        <resource-file src="src/android/res/drawable-ldpi/push_notification_icon.png" target="res/drawable-ldpi/push_notification_icon.png" />
+	        <resource-file src="src/android/res/drawable-mdpi/push_notification_icon.png" target="res/drawable-mdpi/push_notification_icon.png" />
+	        <resource-file src="src/android/res/drawable-xhdpi/push_notification_icon.png" target="res/drawable-xhdpi/push_notification_icon.png" />
+	        <resource-file src="src/android/res/drawable-xxhdpi/push_notification_icon.png" target="res/drawable-xxhdpi/push_notification_icon.png" />            
+
+            <source-file src="src/android/CDVMFPPush.java"   target-dir="src/com/ibm/mobilefirstplatform/clientsdk/cordovaplugins/push" />
+        </platform>
+
+        <platform name="ios">
+
+             <js-module name="MFPPush" src="www/MFPPush.js">
+                <clobbers target="MFPPush" />
+            </js-module>
+            
+            <config-file parent="/*" target="config.xml">
+
+                <feature name="MFPPushPlugin">
+                    <param name="ios-package" value="CDVMFPPush" />
+                </feature>
+
+            </config-file>
+            
+	        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+	            <array>
+	                <string>remote-notification</string>
+	            </array>
+	        </config-file>            
+            
+            <header-file src="src/ios/MFPAppDelegate+push.h" />
+            <header-file src="src/ios/CDVMFPPush.h" />
+
+            <source-file src="src/ios/MFPAppDelegate+push.m" />            
+            <source-file src="src/ios/CDVMFPPush.m" />
+
+
+            <framework src="src/ios/Frameworks/IBMMobileFirstPlatformFoundationPush.framework" custom="true" />
+        </platform>
+
+ <platform name="windows">
+
+        <config-file target="config.xml" parent="/*">
+        </config-file>
+
+         <js-module name="MFPPush" src="src/windows/MFPPush.js">
+            <clobbers target="MFPPush" />
+        </js-module>
+
+
+    </platform>
+    </plugin>
